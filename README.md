@@ -1,2 +1,2 @@
 # LeetCode
-# per day 2 leetCode solution will be uploaded
+# Per day 2 LeetCode Problem's Solution will be uploaded
