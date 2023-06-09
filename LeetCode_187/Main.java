@@ -16,17 +16,13 @@ class Solution {
         return list;
     }
 }
-
 public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
-
         // Example input string
         String input = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
-
         // Find repeated DNA sequences
         List<String> repeatedSequences = solution.findRepeatedDnaSequences(input);
-
         // Print the repeated sequences
         for (String sequence : repeatedSequences) {
             System.out.println(sequence);
