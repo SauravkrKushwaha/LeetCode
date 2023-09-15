@@ -14,9 +14,6 @@ class Solution {
             }
         }
 
-        // Sort edges by their cost
-        Collections.sort(edges, (a, b) -> a.cost - b.cost);
-
         // Initialize the parent array for the union-find algorithm
         int[] parent = new int[n];
         for (int i = 0; i < n; i++) {
@@ -26,8 +23,11 @@ class Solution {
         int minCost = 0;
         int edgeCount = 0;
 
-        // Kruskal's algorithm
-        for (Edge edge : edges) {
+        // Sort edges by their cost using a priority queue (min-heap)
+        PriorityQueue<Edge> minHeap = new PriorityQueue<>(edges);
+
+        while (!minHeap.isEmpty() && edgeCount < n - 1) {
+            Edge edge = minHeap.poll();
             int u = edge.u;
             int v = edge.v;
             int cost = edge.cost;
@@ -36,11 +36,6 @@ class Solution {
                 union(parent, u, v);
                 minCost += cost;
                 edgeCount++;
-            }
-
-            // Early exit condition: If we've added (n - 1) edges, we have a spanning tree
-            if (edgeCount == n - 1) {
-                break;
             }
         }
 
@@ -62,7 +57,7 @@ class Solution {
         parent[rootX] = rootY;
     }
 
-    class Edge {
+    class Edge implements Comparable<Edge> {
         int u;
         int v;
         int cost;
@@ -72,8 +67,14 @@ class Solution {
             this.v = v;
             this.cost = cost;
         }
+
+        @Override
+        public int compareTo(Edge other) {
+            return this.cost - other.cost;
+        }
     }
 }
+
 
 public class Main {
     public static void main(String[] args) {
